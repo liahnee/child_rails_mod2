@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  learning_interest: MyString
+  hobby_interest: MyString
+
+two:
+  learning_interest: MyString
+  hobby_interest: MyString

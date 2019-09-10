@@ -1,0 +1,14 @@
+<h2> All Children's Contact </h2>
+
+<ul>
+<%= @children.each do |child| %>
+    <li>
+    <%= link_to child.full_name, child %>
+    </li>
+    Age: <%= @child.age %>  Season: <%= @child.season %>
+    Delete button
+<% end %>
+</ul>
+
+<%= link_to "Parent meeting", users_path %>
+Log-out

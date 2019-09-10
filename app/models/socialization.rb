@@ -1,0 +1,2 @@
+class Socialization < ApplicationRecord
+end

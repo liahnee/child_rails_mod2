@@ -1,0 +1,13 @@
+
+<% @users.each do |user| %>
+    <b><%= user.username %></b>
+    <ul>
+    <% user.user_children.each do |child| %>
+        <li> 
+        <%= link_to child.full_name, child %><br>
+        </li>
+        Job: <%= child.job.title %>
+    <% end %>
+    </ul>
+<% end %>
+

@@ -1,0 +1,19 @@
+<h2> <%= @child.first_name + "'s'" + " Current Status" %> </h2>
+
+<ul>
+Age: <%= @child.age_i %>
+Season: <%= @child.season %>
+Gender: <%= @child.gender %>
+
+Happiness: <%= @child.happiness %>
+Ambition: <%= @child.ambition %>
+
+Language: <%= @child.language %>
+Mathematic: <%= @child.mathematic %>
+Coding: <%= @child.coding %>
+Art: <%= @child.art %>
+
+Job: <%= @child.job.title %>
+</ul>
+
+<%= link_to "Assign schedule", edit_child_path(child) %>
