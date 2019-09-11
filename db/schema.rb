@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_10_231112) do
+ActiveRecord::Schema.define(version: 2019_09_11_164014) do
 
   create_table "children", force: :cascade do |t|
     t.string "first_name"
@@ -69,15 +69,13 @@ ActiveRecord::Schema.define(version: 2019_09_10_231112) do
 
   create_table "personalities", force: :cascade do |t|
     t.integer "child_id"
-    t.integer "learning_interest_id"
-    t.integer "hobby_interest_id"
     t.string "social_trait"
     t.string "learning_trait"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "learning_id"
+    t.integer "hobby_id"
     t.index ["child_id"], name: "index_personalities_on_child_id"
-    t.index ["hobby_interest_id"], name: "index_personalities_on_hobby_interest_id"
-    t.index ["learning_interest_id"], name: "index_personalities_on_learning_interest_id"
   end
 
   create_table "socializations", force: :cascade do |t|
@@ -96,6 +94,4 @@ ActiveRecord::Schema.define(version: 2019_09_10_231112) do
 
   add_foreign_key "main_children", "children"
   add_foreign_key "main_children", "users"
-  add_foreign_key "personalities", "hobbies", column: "hobby_interest_id"
-  add_foreign_key "personalities", "learnings", column: "learning_interest_id"
 end

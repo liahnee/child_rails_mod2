@@ -15,11 +15,16 @@ class ChildrenController < ApplicationController
         @user = User.find(params[:user_id])
         @child = Child.new(child_params(:first_name, :last_name, :user_id))
         @child.base
-        if @child.valid?
-            @child.save
-            @child.personality_id = @child.c_personality
-            redirect_to user_child_path(@child)
-        else 
+        if @child.save
+            @child.c_personality
+            if @child.personality_id
+                # binding.pry
+                redirect_to user_child_path(@user, @child)
+            else
+                Child.destory(@child.id)
+                render :new
+            end
+        else
             render :new
         end
     end
@@ -35,13 +40,11 @@ class ChildrenController < ApplicationController
     end
 
     def update 
-        byebug
         @user = User.find(params[:user_id])
         @child = Child.find(params[:id])
-        # action(params)
-        # @child.aging(@child)
-        # # @child.update()
-        # byebug
+        @child.action(params)
+        @child.aging(@child)
+        @child.update
         redirect_to user_child_path
     end 
 

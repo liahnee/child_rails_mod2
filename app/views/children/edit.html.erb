@@ -2,19 +2,29 @@
 <b> Age: <%= @child.age_i %><br>
  Season: <%= @child.season %> </b>
  <br> <br><br><br>
+<%= form_tag(user_child_path, method: "patch") do |f| =%>
+    <% grouped_options = {learning:[], hobby:[], socialization:[]} %>
+    <% Learning.all.each do |act| %>
+        <% grouped_options[:learning] << [act.action, ["Learning", act.id]] %>
+    <% end %>
+    <% Hobby.all.each do |act| %>
+        <% grouped_options[:hobby] << [act.action, ["Hobby", act.id]] %>
+    <% end %>
+    <% Socialization.all.each do |act| %>
+        <% grouped_options[:socialization] << [act.action, ["Socialization", act.id]] %>
+    <% end %>
 
-    <% grouped_options = [['Study',[Learning.find(1).action, Learning.find(2).action, Learning.find(3).action, Learning.find(4).action]], ['Play',[Hobby.find(1).action, Hobby.find(2).action, Hobby.find(3).action, Hobby.find(4).action, Hobby.find(5).action]], ['Socialize',[Socialization.find(1).action, Socialization.find(2).action, Socialization.find(3).action, Socialization.find(4).action]]] %>
-    9 AM ~ 10 AM 1: 
-    <select> :activity1, grouped_options_for_select(grouped_options) %><br><br>
+    9 AM ~ 10 AM : 
+    <%= select_tag :activity1, grouped_options_for_select(grouped_options) %><br><br>
     10 AM ~ 11 PM :
-    <%= f.select :activity2, grouped_options_for_select(grouped_options) %><br><br>
+    <%= select_tag :activity2, grouped_options_for_select(grouped_options) %><br><br>
     11 AM ~ 12 PM :
-    <%= f.select :activity3, grouped_options_for_select(grouped_options) %><br><br>
+    <%= select_tag :activity3, grouped_options_for_select(grouped_options) %><br><br>
     1 PM ~ 2 PM :
-    <%= f.select :activity4, grouped_options_for_select(grouped_options) %><br><br>
+    <%= select_tag :activity4, grouped_options_for_select(grouped_options) %><br><br>
     2 PM ~ 3 PM :
-    <%= f.select :activity5, grouped_options_for_select(grouped_options) %><br><br>
+    <%= select_tag :activity5, grouped_options_for_select(grouped_options) %><br><br>
     3 PM ~ 4 PM
-    <%= f.select :activity6, grouped_options_for_select(grouped_options) %><br><br>
-    <%= f.submit "Schedule set for #{@child.season}" %>
+    <%= select_tag :activity6, grouped_options_for_select(grouped_options) %><br><br>
+    <%= submit_tag "Schedule set for #{@child.season}" %>
 <% end %>
