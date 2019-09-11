@@ -3,7 +3,7 @@ class Personality < ApplicationRecord
     belongs_to :learning
     belongs_to :hobby
 
-    validates :social_trait, inclusion: { in: "introvert", "extrovert" }
-    validates :study_trait, inclusion: { in: "All-rounder", "Interest only"}
+    validates :social_trait, inclusion: { in: %w(Introvert, Extrovert) }
+    validates :learning_trait, inclusion: { in: ["All-rounder", "Interest only"]}
 
 end

@@ -16,9 +16,9 @@ class CreateChildren < ActiveRecord::Migration[6.0]
       t.float :language
       t.float :mathematic
 
-      t.reference :job_id      
-      t.reference :personality_id
-      t.reference :user_id
+      t.references :job
+      t.references :personality
+      t.references :user
 
       t.timestamps
     end

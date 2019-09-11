@@ -1,13 +1,21 @@
+<h2> all users and their main children </h2>
 
 <% @users.each do |user| %>
     <b><%= user.username %></b>
+
+    <% m_child = MainChild.find_by(user_id:user.id) %>
     <ul>
-    <% user.user_children.each do |child| %>
-        <li> 
-        <%= link_to child.full_name, child %><br>
-        </li>
-        Job: <%= child.job.title %>
+    <% if m_child %>
+        <% m_child.each do |child| %>
+            <li> 
+            <%= link_to child.full_name, user_child_path(child) %><br>  
+            </li>
+            Job: <%= child.job.title %>
+        <% end %>
+    <% else %>
+        This user has not setup main child yet.
     <% end %>
     </ul>
 <% end %>
 
+Link back to user show in progress

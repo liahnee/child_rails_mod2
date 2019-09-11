@@ -1,4 +1,7 @@
 Job.destroy_all
+Learning.destroy_all
+Hobby.destroy_all
+Socialization.destroy_all
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -17,8 +20,6 @@ Hobby.create(action:"Sing", id:2)
 Hobby.create(action:"Read", id:3)
 Hobby.create(action:"Draw", id:4)
 Hobby.create(action:"Video game", id:5)
-
-
 
 Socialization.create(action:"Playground", value: 1, id:1)
 Socialization.create(action:"Zoo", value: 2, id:2)

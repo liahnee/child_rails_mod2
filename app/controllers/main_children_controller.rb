@@ -1,0 +1,2 @@
+class MainChildrenController < ApplicationController
+end

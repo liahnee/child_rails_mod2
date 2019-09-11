@@ -1,14 +1,20 @@
 <h2> All Children's Contact </h2>
 
 <ul>
-<%= @children.each do |child| %>
-    <li>
-    <%= link_to child.full_name, child %>
-    </li>
-    Age: <%= @child.age %>  Season: <%= @child.season %>
-    Delete button
+<% if @user.children.size > 0 %>
+    <% @user.children.each do |child| %>
+        <li>
+        <%= link_to child.full_name, user_child_path(@user, child) %>
+        </li>
+        Age: <%= child.age %>  Season: <%= child.season %>
+        Delete button
+    <% end %>
+<% else %>
+        <label>You currently have no adopted children.</label>
 <% end %>
 </ul>
 
-<%= link_to "Parent meeting", users_path %>
+<%= link_to "Adopt a Child", new_user_child_path %><br>
+<%= link_to "Parent meeting", users_path %><br>
+<br>
 Log-out

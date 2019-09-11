@@ -1,0 +1,2 @@
+class MainChild < ApplicationRecord
+end

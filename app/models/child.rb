@@ -1,20 +1,15 @@
 class Child < ApplicationRecord
     belongs_to :user
-    belongs_to :user_child
     has_many :personalities
+    belongs_to :job
 
-    validates :first_name, length: { in: 2...10 }
-    validates :last_name, length: { in: 2...10 }
+    validates :first_name, length: { maximum: 10 }, presence: true
+    validates :last_name, length: { maximum: 20 }, presence: true
 
     @learning_trait = [ "All-rounder", "Interest only" ]
-    @social_trait = w%(Introvert, Extrovert)
+    @social_trait = %w(Introvert, Extrovert) 
 
-    def initialize    
-        # @user_id:params(child_params)
-
-        # @first_name:params(child_params)
-        # @last_name:params(child_params)
-        
+    def base
         self.age = 7.00
         self.gender = c_gender
     
@@ -28,8 +23,6 @@ class Child < ApplicationRecord
         self.mathematic = 0.00 ##accumulative
         
         self.job_id = 1
-        self.personality_id = c_personality.id
-
     end
 
     ############################################   initialize helpers
@@ -42,23 +35,27 @@ class Child < ApplicationRecord
     end
 
     def c_personality_helper
-        Personality.create(
-            learning_interest: Learning.all.sample, 
-            hobby_interest: Hobby.all.sample,
-            learning_trait: learning_trait_helper
+        @social_trait = %w(Introvert, Extrovert) 
+        learning = Learning.all
+        hobby = Hobby.all
+        mp = Personality.create(
+            learning_interest_id: learning.sample, 
+            hobby_interest_id: hobby.sample,
+            learning_trait: learning_trait_helper,
             social_trait: @social_trait.sample,
             child_id: self.id
             )
+        self.personality_id = mp.id
     end
 
     def c_personality
         if self.age == 7.00 || self.age == 12.00 || self.age == 16.00
-            if Personality.find_by(user_id:self.id)
-                Personality.find_by(user_id:self.id).destory
+            if Personality.find_by(child_id:self.id)
+                Personality.find_by(child_id:self.id).destory
                 c_personality_helper
             else
                 c_personality_helper
-            ends
+            end
         else
             puts "Age-c_personality error"
         end
@@ -66,17 +63,17 @@ class Child < ApplicationRecord
     end
 
     def c_gender
-        gender = w%(female male)
+        gender = %w(female male).sample
     end
 
     ############################################   display helpers 
 
     def age_i
-        self.age.floor
+        self.age.floor.to_i
     end
 
     def season
-        remainder = self.modulo(1)
+        remainder = self.age.modulo(1)
         if remainder == 0
             return "spring"
         elsif remainder == 0.25
@@ -90,6 +87,7 @@ class Child < ApplicationRecord
 
     def full_name
         self.first_name + " " + self.last_name
+
     end
 
     ############################################   action helpers 
@@ -154,15 +152,28 @@ class Child < ApplicationRecord
         end
         
         @child.social += activity.value 
-            if @child.social > 1.0
-                @child.social = 1.0
+        if @child.social > 1.0
+            @child.social = 1.0
+        end
+    end
+
+
+
+    def action(params)
+        params.each do |activity|
+            action = activity[1][0]
+            if activity[0] == 'Study'
+                    @child.learning(action)
+            elsif activity[0] == 'Play'
+                    @child.do_hobby(action)
+            elsif activity[0] == 'Socialize'
+                    @child.socialize(action)
             end
         end
     end
 
-    def aging
-        @child.age += 0.25
-        @child.social -= 0.25
+    def aging(child)
+        child.age += 0.25
+        child.social -= 0.25
     end
-
 end

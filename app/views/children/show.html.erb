@@ -1,19 +1,21 @@
-<h2> <%= @child.first_name + "'s'" + " Current Status" %> </h2>
+<h2> <%= @child.first_name + "'s" + " Current Status" %> </h2>
 
+<b> Season: <%= @child.season %><br> </b>
 <ul>
-Age: <%= @child.age_i %>
-Season: <%= @child.season %>
-Gender: <%= @child.gender %>
 
-Happiness: <%= @child.happiness %>
-Ambition: <%= @child.ambition %>
-
-Language: <%= @child.language %>
-Mathematic: <%= @child.mathematic %>
-Coding: <%= @child.coding %>
-Art: <%= @child.art %>
-
-Job: <%= @child.job.title %>
+Age: <%= @child.age_i %><br>
+<br>
+Gender: <%= @child.gender %><br>
+<br>
+Happiness: <%= number_with_precision(@child.happiness, precision: 2)  %><br>
+Ambition: <%= number_with_precision(@child.ambition, precision: 2) %><br>
+<br>
+Language: <%= number_with_precision(@child.language, precision: 2) %><br>
+Mathematic: <%= number_with_precision(@child.mathematic, precision: 2) %><br>
+Coding: <%= number_with_precision(@child.coding, precision: 2) %><br>
+Art: <%= number_with_precision(@child.art, precision: 2) %><br>
+<br>
+Job: <%= @child.job.title %><br><br>
 </ul>
 
-<%= link_to "Assign schedule", edit_child_path(child) %>
+<%= link_to "Assign schedule", edit_user_child_path %>

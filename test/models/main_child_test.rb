@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UserChildTest < ActiveSupport::TestCase
+class MainChildTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

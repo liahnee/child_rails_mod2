@@ -1,20 +1,20 @@
 <h2> <%= @child.full_name %> </h2>
-<b> Age: <%= @child.age %>  Season: <%= @child.season %> </b>
+<b> Age: <%= @child.age_i %><br>
+ Season: <%= @child.season %> </b>
+ <br> <br><br><br>
 
-<%= form_for @child do |f| %>
-    <% grouped_options = [['Study'[Learn.find(1), Learn.find(2), Learn.find(3), Learn.find(4)]], ['Play'[Hobby.find(1), Hobby.find(2), Hobby.find(3), Hobby.find(4), Hobby.find(5)]], ['Socialize'[Socialization.find(1), Socialization.find(2), Socialization.find(3), Socialization.find(4)]]]
+    <% grouped_options = [['Study',[Learning.find(1).action, Learning.find(2).action, Learning.find(3).action, Learning.find(4).action]], ['Play',[Hobby.find(1).action, Hobby.find(2).action, Hobby.find(3).action, Hobby.find(4).action, Hobby.find(5).action]], ['Socialize',[Socialization.find(1).action, Socialization.find(2).action, Socialization.find(3).action, Socialization.find(4).action]]] %>
     9 AM ~ 10 AM 1: 
-    <%= f.select :activity1, grouped_options_for_select(grouped_options) %>
+    <select> :activity1, grouped_options_for_select(grouped_options) %><br><br>
     10 AM ~ 11 PM :
-    <%= f.select :activity2, grouped_options_for_select(grouped_options) %>
+    <%= f.select :activity2, grouped_options_for_select(grouped_options) %><br><br>
     11 AM ~ 12 PM :
-    <%= f.select :activity3, grouped_options_for_select(grouped_options) %>
+    <%= f.select :activity3, grouped_options_for_select(grouped_options) %><br><br>
     1 PM ~ 2 PM :
-    <%= f.select :activity4, grouped_options_for_select(grouped_options) %>
+    <%= f.select :activity4, grouped_options_for_select(grouped_options) %><br><br>
     2 PM ~ 3 PM :
-    <%= f.select :activity5, grouped_options_for_select(grouped_options) %>
+    <%= f.select :activity5, grouped_options_for_select(grouped_options) %><br><br>
     3 PM ~ 4 PM
-    <%= f.select :activity6, grouped_options_for_select(grouped_options) %>
-    binding.pry
-    ##drop_down_menu on 5 activities to choose from. params[learn][activitiy#], params[hobby][activty#], params[socialization][activity#]. activity# should be unique in params but not the activity type
+    <%= f.select :activity6, grouped_options_for_select(grouped_options) %><br><br>
+    <%= f.submit "Schedule set for #{@child.season}" %>
 <% end %>
