@@ -1,8 +1,11 @@
-<h2> Log In </h2>
-
-soon to be made 
-
 <h2> Create New User </h2>
+
+<% if @user.errors.any? %>
+    <% @user.errors.full_messages.each do |msg| %>
+        <%= msg %>
+    <% end %>
+<% end %>
+
 Username must be unique.
 Password must be between 4 to 20 characters.
 <br><br>
@@ -10,13 +13,9 @@ Password must be between 4 to 20 characters.
     <label><b> username: </label>
     <%= f.text_field :username %><br>
     <label> password: </label>
-    <%= f.text_field :password %> </b><br><br>
+    <%= f.text_field :password %>
+    <label> password confirmation: </label>
+    <%= f.text_field :password, confirmation: true %><br> </b><br><br>
     <%= f.submit "Create New User" %>
 <% end %>
 <br><br>
-<% if @user.errors.any? %>
-    <% @user.errors.full_messages.each do |msg| %>
-        <%= msg %><br>
-    <% end %>
-<% end %>
-

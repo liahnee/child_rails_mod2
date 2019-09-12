@@ -1,2 +1,0 @@
-class HobbiesController < ApplicationController
-end

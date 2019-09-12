@@ -2,29 +2,46 @@
 <b> Age: <%= @child.age_i %><br>
  Season: <%= @child.season %> </b>
  <br> <br><br><br>
-<%= form_tag(user_child_path, method: "patch") do |f| =%>
-    <% grouped_options = {learning:[], hobby:[], socialization:[]} %>
-    <% Learning.all.each do |act| %>
-        <% grouped_options[:learning] << [act.action, ["Learning", act.id]] %>
-    <% end %>
-    <% Hobby.all.each do |act| %>
-        <% grouped_options[:hobby] << [act.action, ["Hobby", act.id]] %>
-    <% end %>
-    <% Socialization.all.each do |act| %>
-        <% grouped_options[:socialization] << [act.action, ["Socialization", act.id]] %>
-    <% end %>
-
-    9 AM ~ 10 AM : 
-    <%= select_tag :activity1, grouped_options_for_select(grouped_options) %><br><br>
-    10 AM ~ 11 PM :
-    <%= select_tag :activity2, grouped_options_for_select(grouped_options) %><br><br>
-    11 AM ~ 12 PM :
-    <%= select_tag :activity3, grouped_options_for_select(grouped_options) %><br><br>
-    1 PM ~ 2 PM :
-    <%= select_tag :activity4, grouped_options_for_select(grouped_options) %><br><br>
-    2 PM ~ 3 PM :
-    <%= select_tag :activity5, grouped_options_for_select(grouped_options) %><br><br>
-    3 PM ~ 4 PM
-    <%= select_tag :activity6, grouped_options_for_select(grouped_options) %><br><br>
-    <%= submit_tag "Schedule set for #{@child.season}" %>
+ <% if @child.not_yet? %>
+    Your child has a job offer! <br>
+    <b> <%= @child.c_job %> </b><br><br>
+    You can take the job and give indepence or continue onto more studying!<br>
+    <%= link_to "Take the job!", independence_path, method: :patch %><br>
+<% elsif @child.job_id == 3 && @child.age == 23.00 %> 
+    Your child decided that <%= @child.he_she %> is old enough to be independent! <br>
+    <%= @child.he_she %> decided to be: <%= @child.c_job %> <br>
+    <%= link_to "Say farewell!", independence_path, method: :patch %><br>
 <% end %>
+<br><br>
+<div>
+<% if @child.no_more? %>
+    <%= form_tag(user_child_path, method: "patch") do |f| =%>
+        <% grouped_options = {learning:[], hobby:[], socialization:[]} %>
+        <% Learning.all.each do |act| %>
+            <% grouped_options[:learning] << [act.action, ["Learning", act.id]] %>
+        <% end %>
+        <% Hobby.all.each do |act| %>
+            <% grouped_options[:hobby] << [act.action, ["Hobby", act.id]] %>
+        <% end %>
+        <% Socialization.all.each do |act| %>
+            <% grouped_options[:socialization] << [act.action, ["Socialization", act.id]] %>
+        <% end %>
+
+        9 AM ~ 10 AM : 
+        <%= select_tag :activity1, grouped_options_for_select(grouped_options) %><br><br>
+        10 AM ~ 11 PM :
+        <%= select_tag :activity2, grouped_options_for_select(grouped_options) %><br><br>
+        11 AM ~ 12 PM :
+        <%= select_tag :activity3, grouped_options_for_select(grouped_options) %><br><br>
+        1 PM ~ 2 PM :
+        <%= select_tag :activity4, grouped_options_for_select(grouped_options) %><br><br>
+        2 PM ~ 3 PM :
+        <%= select_tag :activity5, grouped_options_for_select(grouped_options) %><br><br>
+        3 PM ~ 4 PM
+        <%= select_tag :activity6, grouped_options_for_select(grouped_options) %><br><br>
+        <%= submit_tag "Schedule set for #{@child.season}" %>
+    <% end %>
+<% end %>
+</div>
+<br><br>
+<%= link_to "Back to Child's page", user_child_path(@user, @child) %>

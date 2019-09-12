@@ -1,9 +1,0 @@
-<% @child.c_personality %>
-binding.pry
-<% Personality.find(@child.personality_id).child_id = @child.id %>
-
-<% if @child.personality_id.valid? %>
-    <%= link_to "You have a New Family!", user_child_path(@child) %> 
-<% else %>
-    Failed to create a personality
-<% end %>

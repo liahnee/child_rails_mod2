@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :sessions, only: [:create, :destroy]
+  get '/sessions/new', to: 'sessions#new', as: '/login'
   resources :main_children
   resources :socializations
   resources :learnings
@@ -9,6 +11,8 @@ Rails.application.routes.draw do
       resources :personalities #breaking the rule of thumb!
     end
   end
-  root to: 'application#redirect_to_user_new'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  patch '/users/:user_id/children/:id/independence' => 'children#independence', as: :independence
+  root to: 'sessions#new'
+
+  #'application#redirect_to_user_new'
 end

@@ -1,5 +1,6 @@
 require 'pry'
 class ChildrenController < ApplicationController
+    before_action :require_login
 
     def index
         @user = User.find(params[:user_id])
@@ -44,18 +45,36 @@ class ChildrenController < ApplicationController
         @child = Child.find(params[:id])
         @child.action(params)
         @child.aging(@child)
-        @child.update
-        redirect_to user_child_path
+        @child.save
+        redirect_to user_child_path(@user, @child)
     end 
 
     # def post_update
     #     @child = Child.find(params[:id])
     # end 
 
+    def delete
+        @child = Child.find(params[:id])
+        @child.destory
+        redirect_to user_children_path
+    end
+
+    def independence
+        @user = User.find(params[:user_id])
+        @child = Child.find(params[:id])
+        @child.job_id = @child.temp_job_id
+        @child.save
+        redirect_to user_child_path(@user, @child)
+    end
+
 private
 
     def child_params(*args)
         params.permit(*args)
+    end
+
+    def require_login
+        return head(:forbidden) unless session[:id] == params[:id]
     end
 
 end

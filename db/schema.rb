@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_11_164014) do
+ActiveRecord::Schema.define(version: 2019_09_12_095350) do
 
   create_table "children", force: :cascade do |t|
     t.string "first_name"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2019_09_11_164014) do
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "temp_job_id"
     t.index ["job_id"], name: "index_children_on_job_id"
     t.index ["personality_id"], name: "index_children_on_personality_id"
     t.index ["user_id"], name: "index_children_on_user_id"
@@ -87,7 +88,7 @@ ActiveRecord::Schema.define(version: 2019_09_11_164014) do
 
   create_table "users", force: :cascade do |t|
     t.string "username"
-    t.string "password"
+    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
