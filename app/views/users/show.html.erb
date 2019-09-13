@@ -5,31 +5,39 @@ Main children will be visible to other users.<br><br>
 <% if @main_children.size > 0 %>
     <ul>
     <% @main_children.each do |m_child| %>
+        <li>
         <% child = Child.find(m_child.child_id) %>
         <%= link_to child.full_name, user_child_path(child.id) %> 
+        </li>
     <% end %>
     </ul>
 <% else %>
     There is no main child to share with other parents.
 <% end %>
 <br><br>
-<%= link_to "Set Main Children", new_main_child_path %>
-<br><br>
 <h2> My Independent Children </h2>
-
-<ul>
-
-<% @my_children.each do |child| %>
-    <% if child.job_id != 1 && child.job_id != 3 %>
-        <li>
-        <%= link_to child.full_name, user_child_path(child.id) %><br>
-        </li>
-Age:    <%= child.age_i %><br>
-Career: <%= Job.find(child.job_id).title %><br><br>
+<% if @my_children.size > 0 %>
+<% i_child = [] %>
+    <% @my_children.each do |child| %>
+        <% if child.job_id != 1 && child.job_id != 3 %>
+            <% i_child << child %>
+        <ul>
+            <li>
+            <%= link_to child.full_name, user_child_path(child.id) %><br>
+            </li>
+    Age:    <%= child.age_i %><br>
+    Career: <%= Job.find(child.job_id).title %><br><br>
+        <ul>
+        <% end %>
     <% end %>
+    <% if i_child.length == 0 %>
+        There is no child at this time.
+    <% end %>
+<% else %>
+There is no child at this time.
 <% end %>
+<br>
+<br>
+<br>
 
 
-<%= link_to "All Children's Contact List", user_children_path(@user) %>
-<br><br>
-<%= link_to "Log Out", session_path(@user.id), method: :delete, :data => { :confirm => "Good bye" } %>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html class='root'>
+<head>
+    <title>ChildRails</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'no_login', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+    <div class="bar">
+        <a href="/" class="bropbtn"> Home </a><br>
+        <a href="/users" class="bropbtn"> Board </a><br>
+        <div class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Enter  </a>
+            <div class="dropdown-content">
+                <%= link_to "Login", login_path %>
+            </div>
+            <div class="dropdown-content">
+                <%= link_to "Create", new_user_path %>
+            </div>
+        </div>
+    </div>
+    <div class="contents">
+        <%= yield %>
+    </div>
+    <div ="footer">
+      s
+    </div>
+</body>
+
+</html>

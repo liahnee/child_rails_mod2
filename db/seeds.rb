@@ -15,7 +15,7 @@ Learning.create(action:"Art", id:4)
 Hobby.create(action:"Sports", id:1)
 Hobby.create(action:"Sing", id:2)
 Hobby.create(action:"Read", id:3)
-Hobby.create(action:"Draw", id:4)
+Hobby.create(action:"Draw", id:4) 
 Hobby.create(action:"Video game", id:5)
 
 Socialization.create(action:"Playground", value: 0.30, id:1)

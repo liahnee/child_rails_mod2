@@ -18,10 +18,5 @@ Art: <%= number_with_precision(@child.art, precision: 2) %><br>
 Job: <%= @child.job.title %><br><br>
 </ul>
 
-<% if @child.age <= 23 %>
-    <% if @child.job_id == 1 || @child.job_id == 3 %>
-        <%= link_to "Assign schedule", edit_user_child_path %>
-    <% end %>
-<% end %>
+
 <br><br>
-<%= link_to "All Children's Contacts", user_children_path %>

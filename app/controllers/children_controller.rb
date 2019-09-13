@@ -3,26 +3,25 @@ class ChildrenController < ApplicationController
     before_action :require_login
 
     def index
-        @user = User.find(params[:user_id])
         @children = Child.all.find_by(user_id:params[:user_id])
     end
 
     def new
-        @user = User.find(params[:user_id])
+
         @child = Child.new
     end
 
     def create
-        @user = User.find(params[:user_id])
+
         @child = Child.new(child_params(:first_name, :last_name, :user_id))
         @child.base
         if @child.save
             @child.c_personality
             if @child.personality_id
                 # binding.pry
-                redirect_to user_child_path(@user, @child)
+                redirect_to user_child_path(@current_user, @child)
             else
-                Child.destory(@child.id)
+                @child.destroy
                 render :new
             end
         else
@@ -31,50 +30,45 @@ class ChildrenController < ApplicationController
     end
 
     def show
-        @user = User.find(params[:user_id])
+
         @child = Child.find(params[:id])
+        render :layout => 'child' 
     end
 
     def edit
-        @user = User.find(params[:user_id])
+
         @child = Child.find(params[:id])
+        render :layout => 'child_edit' 
     end
 
     def update 
-        @user = User.find(params[:user_id])
+
         @child = Child.find(params[:id])
         @child.action(params)
         @child.aging(@child)
         @child.save
-        redirect_to user_child_path(@user, @child)
+        redirect_to user_child_path(@current_user, @child)
     end 
 
-    # def post_update
-    #     @child = Child.find(params[:id])
-    # end 
-
-    def delete
+    def destroy
         @child = Child.find(params[:id])
-        @child.destory
-        redirect_to user_children_path
+        @temp_name = @child.full_name
+        @child.destroy!
+        redirect_to user_children_path, :notice => "#{@temp_name} is not your child anymore."
     end
 
     def independence
-        @user = User.find(params[:user_id])
+
         @child = Child.find(params[:id])
         @child.job_id = @child.temp_job_id
         @child.save
-        redirect_to user_child_path(@user, @child)
+        redirect_to user_child_path(@current_user, @child)
     end
 
 private
 
     def child_params(*args)
         params.permit(*args)
-    end
-
-    def require_login
-        return head(:forbidden) unless session[:id] == params[:id]
     end
 
 end

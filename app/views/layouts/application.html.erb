@@ -1,15 +1,38 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html class='root'>
+<head>
     <title>ChildRails</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+</head>
+<body>
 
-  <body>
-    <%= yield %>
-  </body>
+<div class="bar">
+  <a href="/"> Home </a><br>
+  <a href="/users"> Board </a><br>
+  <% if @current_user %>
+    <%= link_to "Log Out", session_path(id:@current_user.id), method: :delete, :data => { :confirm => "Good bye" } %><br><br>
+
+
+    <%= link_to "My Room", user_path(@current_user) %> 
+    
+    <div class="dropdown">
+      <%= link_to "Children's Room", user_children_path(@current_user) %>
+        <div class= 'dropdown-content'>
+        <% @current_user = User.find(@current_user.id) %>
+        <% if @current_user.max_number %>
+          <%= link_to "Adopt a Child", new_user_child_path(@current_user) %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+</div>
+  <div class="contents">
+      <%= yield %>
+  </div>
+</body>
 </html>

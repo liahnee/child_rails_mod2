@@ -13,9 +13,9 @@
         <% @main_children.each do |mchild| %>
             <li> 
             <% child = Child.find(mchild.child_id) %>
-            <%= link_to child.full_name, main_child_path(mchild.id) %><br>  
+            <%= link_to child.full_name, user_child_main_child_path(child_id:child.id, id:mchild.id, user_id:user.id) %><br>  
             </li>
-            Job: <%= child.job.title %>
+            </t>Job: <%= child.job.title %>
         <% end %>
     <% else %>
         This user has not setup main child yet.
@@ -24,11 +24,4 @@
 <% end %>
 
 <br><br>
-<% if !session[:username] == nil %>
-    <% if session[:username].empty? %>
-        <%= link_to "Back to My Children", user_path(@current_user.id) %>
-    <% end %>
-<% else %>
-    <%= link_to "Login", login_path %><br>
-    <%= link_to "Create New User", new_user_path %><br>
-<% end %>
+

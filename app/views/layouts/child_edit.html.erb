@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html class='root'>
+<head>
+    <title>ChildRails</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+
+<div class="bar">
+  <a href="/"> Home </a><br>
+  <a href="/users"> Board </a><br>
+  <%= link_to "Log Out", session_path(@current_user.id), method: :delete, :data => { :confirm => "Good bye" } %>
+<br>
+<br>
+  <%= link_to "My Room", user_path(@current_user.id) %> 
+    <div class="dropdown">
+        <%= link_to "Children's Room", user_children_path(@current_user.id) %>
+        <div class= 'dropdown-content'>
+            <% @current_user = User.find(@current_user.id) %>
+            <% if @current_user.max_number %>
+                <%= link_to "Adopt a Child", new_user_child_path(@current_user) %>
+            <% end %>
+        </div>
+    </div>
+<br>
+<br>
+<br>
+<br>
+    <div class="abs">
+    <%= link_to "Back to Child's page", user_child_path(@current_user, @child) %>
+    </div>
+<br>
+<br>
+<br>
+<br>
+    <div class="dissolution">
+        <%= link_to "Adoption Dissolution", user_child_path(@current_user, @child.id), method: :delete, data: { confirm: "You won't be able to see #{@child.his_her} anymore. Are you sure?" } %><br><br>
+    </div>
+</div>
+<div class="contents">
+    <%= yield %>
+</div>
+
+
+</body>
+</html>

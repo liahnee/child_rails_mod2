@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html class='root'>
+<head>
+    <title>ChildRails</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+
+<div class="bar">
+  <a href="/"> Home </a><br>
+  <a href="/users"> Board </a><br>
+  <%= link_to "Log Out", session_path(session[:user_id]), method: :delete, :data => { :confirm => "Good bye" } %>
+<br>
+<br>
+  <%= link_to "My Room", user_path(session[:user_id]) %> 
+    <div class="dropdown">
+        <%= link_to "Children's Room", user_children_path(session[:user_id]) %>
+        <div class= 'dropdown-content'>
+            <% @current_user = User.find(session[:user_id]) %>
+            <% if @current_user.max_number %>
+                <%= link_to "Adopt a Child", new_user_child_path(@current_user) %>
+            <% end %>
+        </div>
+    </div>
+<br>
+<br>
+<br>
+<br>
+    <div class="abs">
+        <% if @child.age <= 23 %>
+            <% if @child.job_id == 1 || @child.job_id == 3 %>
+                <%= link_to "Assign schedule", edit_user_child_path %>
+            <% end %>
+        <% end %>
+    </div>
+<br>
+<br>
+<br>
+<br>
+    <div>
+        <% params[:child_id] = params[:id] %>
+        <%= link_to "Set as a Main Child", user_child_new_main_child_path(child_id:params[:id]), method: :post %><br><br>
+    </div>
+<br>
+<br>
+<br>
+<br>
+    <div class="dissolution">
+        <%= link_to "Adoption Dissolution", user_child_path(user_id:@current_user.id, id:@child.id), method: :delete, data: { confirm: "You won't be able to see #{@child.his_her} anymore. Are you sure?" } %><br><br>
+    </div>
+</div>
+  <div class="contents">
+      <%= yield %>
+  </div>
+</body>
+</html>

@@ -3,6 +3,7 @@ class User < ApplicationRecord
     has_many :main_children, :dependent => :destroy
     
     has_secure_password
+    validates :username, presence: true, uniqueness: true, length: { in: 4..20 }
 
     def max_number
         all = []

@@ -1,21 +1,10 @@
 <h2> Log In </h2>
 
-<% if @user %>
-  <% if @user.errors.any? %>
-    <% @user.errors.full_messages.each do |msg| %>
-      <%= msg %>
-    <% end %>
-  <% end %>
-<% end %>
-
 <%= form_tag ({controller: 'sessions', action: 'create', method: 'post'}) do %>
-  <label><b> username: </label>
+  <label><b> Username: </label>
   <input name=username><br>
-  <label> password: </label>
+  <label> Password: </label>
   <input name=password><br>
   <input type='submit' value='login'>
   <br><br>
 <% end %>
-
-  <%= link_to "Create New User", new_user_path %><br>
-  <%= link_to "Parents' Meeting", users_path %>

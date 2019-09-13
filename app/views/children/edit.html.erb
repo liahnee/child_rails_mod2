@@ -26,22 +26,22 @@
         <% Socialization.all.each do |act| %>
             <% grouped_options[:socialization] << [act.action, ["Socialization", act.id]] %>
         <% end %>
-
+        <div class="schedule">
         9 AM ~ 10 AM : 
-        <%= select_tag :activity1, grouped_options_for_select(grouped_options) %><br><br>
+        <%= select_tag :activity1, grouped_options_for_select(grouped_options), :class=>"select-css" %><br><br>
         10 AM ~ 11 PM :
-        <%= select_tag :activity2, grouped_options_for_select(grouped_options) %><br><br>
+        <%= select_tag :activity2, grouped_options_for_select(grouped_options), :class=>"select-css" %><br><br>
         11 AM ~ 12 PM :
-        <%= select_tag :activity3, grouped_options_for_select(grouped_options) %><br><br>
+        <%= select_tag :activity3, grouped_options_for_select(grouped_options), :class=>"select-css" %><br><br>
         1 PM ~ 2 PM :
-        <%= select_tag :activity4, grouped_options_for_select(grouped_options) %><br><br>
+        <%= select_tag :activity4, grouped_options_for_select(grouped_options), :class=>"select-css" %><br><br>
         2 PM ~ 3 PM :
-        <%= select_tag :activity5, grouped_options_for_select(grouped_options) %><br><br>
+        <%= select_tag :activity5, grouped_options_for_select(grouped_options), :class=>"select-css" %><br><br>
         3 PM ~ 4 PM
-        <%= select_tag :activity6, grouped_options_for_select(grouped_options) %><br><br>
+        <%= select_tag :activity6, grouped_options_for_select(grouped_options), :class=>"select-css" %><br><br>
         <%= submit_tag "Schedule set for #{@child.season}" %>
+        </div>
     <% end %>
 <% end %>
 </div>
 <br><br>
-<%= link_to "Back to Child's page", user_child_path(@user, @child) %>

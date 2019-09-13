@@ -1,24 +1,20 @@
 <h2> All Children's Contact </h2> 
 Adoption maximum is 20! <br><br>
-<% if @user.max_number %>
-    <%= link_to "Adopt a Child", new_user_child_path %><br><br><br>
+
+<% if params[:notice] %>
+    <%= params[:notice] %>
 <% end %>
 
 <ul>
-<% if @user.children.size > 0 %>
-    <% @user.children.each do |child| %>
+<% if @current_user.children.size > 0 %>
+    <% @current_user.children.each do |child| %>
         <li>
-        <b><%= link_to child.full_name, user_child_path(@user, child) %></b>
+        <b><%= link_to child.full_name, user_child_path(@current_user, child) %></b>
         </li>
-        Age: <%= child.age %>  Season: <%= child.season %><br>
-        <%= link_to "Adoption Dissolution", user_child_path(@user, child.id), method: :delete, data: { confirm: "Are you sure?" } %><br><br>
+        Age: <%= child.age_i %>  <br>
+        Season: <%= child.season %><br><br>
     <% end %>
 <% else %>
         <label>You currently have no adopted children.</label>
 <% end %>
 </ul>
-
-<%= link_to "Parent meeting", users_path %><br>
-<%= link_to "My Room", user_path(@user) %>
-<br>
-Log-out

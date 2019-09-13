@@ -2,7 +2,7 @@ class Child < ApplicationRecord
     belongs_to :user
     has_many :personalities, :dependent => :destroy
     belongs_to :job
-    has_one :main_child,  :dependent => :destroy
+    has_many :main_child,  :dependent => :destroy
 
     validates :first_name, length: { in: 2..10 }, presence: true
     validates :last_name, length: { in: 2..20 }, presence: true
