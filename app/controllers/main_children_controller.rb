@@ -5,7 +5,6 @@ class MainChildrenController < ApplicationController
     def create
         if !MainChild.find_by(user_id:@current_user.id, child_id:params[:child_id])
             MainChild.create(user_id:@current_user.id, child_id:params[:child_id])
-            byebug
             redirect_to user_child_path(user_id:@current_user.id, id:params[:child_id])
         else 
             redirect_to user_path(id:params[:user_id])

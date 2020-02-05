@@ -8,7 +8,7 @@ class Child < ApplicationRecord
     validates :last_name, length: { in: 2..20 }, presence: true
 
     def base
-        self.age = 7.00
+        self.age = 10.00
         self.gender = c_gender
     
         self.ambition = 0.00 ##accumulative
@@ -134,7 +134,8 @@ class Child < ApplicationRecord
 
                 def do_hobby(action)
                     if Personality.find(self.personality_id).hobby_id == action.id
-                        self.personality.hobby_interest == action
+                        @personality =Personality.find(self.personality_id).hobby_id == action.id
+                        @personality.hobby_interest == action
                         self.happiness += 1.0
                         self.ambition -= 0.02
                     else 
