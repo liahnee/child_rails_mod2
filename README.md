@@ -1,9 +1,12 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+rails 6.0.0
+sqlite3
+puma
+webpacker
+pry, byebug
+bcript
 
-Things you may want to cover:
 
 * Ruby version
 
@@ -20,5 +23,3 @@ Things you may want to cover:
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
-
-* ...
