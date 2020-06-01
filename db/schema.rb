@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2019_09_12_095350) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "children", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -24,9 +27,9 @@ ActiveRecord::Schema.define(version: 2019_09_12_095350) do
     t.float "coding"
     t.float "language"
     t.float "mathematic"
-    t.integer "job_id"
-    t.integer "personality_id"
-    t.integer "user_id"
+    t.bigint "job_id"
+    t.bigint "personality_id"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "temp_job_id"
@@ -60,8 +63,8 @@ ActiveRecord::Schema.define(version: 2019_09_12_095350) do
   end
 
   create_table "main_children", force: :cascade do |t|
-    t.integer "child_id"
-    t.integer "user_id"
+    t.bigint "child_id"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["child_id"], name: "index_main_children_on_child_id"
@@ -69,7 +72,7 @@ ActiveRecord::Schema.define(version: 2019_09_12_095350) do
   end
 
   create_table "personalities", force: :cascade do |t|
-    t.integer "child_id"
+    t.bigint "child_id"
     t.string "social_trait"
     t.string "learning_trait"
     t.datetime "created_at", precision: 6, null: false
