@@ -215,6 +215,7 @@ DEPENDENCIES
   pry
   puma (~> 3.11)
   rails (~> 6.0.0)
+  rake
   sass-rails (~> 5)
   selenium-webdriver
   spring
