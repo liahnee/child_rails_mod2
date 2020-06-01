@@ -1,7 +1,6 @@
 # README
 
 rails 6.0.0
-sqlite3
 puma
 webpacker
 pry, byebug
